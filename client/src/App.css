@@ -1,0 +1,62 @@
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #E0E4EB;
+  color: #202225;
+}
+
+main {
+  position: relative;
+  flex: 1;
+}
+
+
+header {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  color: #F1F1F1;
+}
+
+footer {
+  position: relative;
+  min-height: 170px;
+  padding-top: 20px;
+  background-color: #0A0E15;
+  color: #F1F1F1;
+  z-index: 1;
+}
+
+.progress {
+  position: absolute;
+  margin: 0px;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.relative {
+  position: relative ;
+}
+
+.gap-10 {
+  gap: 10px;
+}
