@@ -1,5 +1,5 @@
 #root {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #E0E4EB;
@@ -7,15 +7,21 @@
 }
 
 main {
+  margin-top: 100px;
   position: relative;
   flex: 1;
 }
 
-
 header {
-  display: flex;
-  flex-direction: column;
+  background-color: #f1f1f1;
+  position: fixed !important;
   height: auto;
+  width: 100%;
+  top: 0 !important;
+  z-index: 10;
+  justify-content: center !important;
+  display: flex !important;
+  flex-direction: column;
   color: #F1F1F1;
 }
 
@@ -60,3 +66,4 @@ footer {
 .gap-10 {
   gap: 10px;
 }
+

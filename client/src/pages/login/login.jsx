@@ -33,20 +33,20 @@ export default function Login() {
                     <span>Ingresa con Google</span>
                   </button>
                 </div>
-                <div class="or-border mb-3"> o ingresar con</div>
-                <div class="input-field">
-                  <input id="email" type="email" class="validate"/>
-                  <label for="email">Correo electrónico</label>
-                  <span class="helper-text" data-error="wrong" data-success="right"></span>
+                <div className="or-border mb-3"> o ingresar con</div>
+                <div className="input-field">
+                  <input id="email" type="email" className="validate"/>
+                  <label htmlFor="email">Correo electrónico</label>
+                  <span className="helper-text" data-error="wrong" data-success="right"></span>
                 </div>
-                <div class="input-field">
-                  <input id="password" type="password" class="validate"/>
-                  <label for="password">Contraseña</label>
-                  <span class="helper-text" data-error="wrong" data-success="right"></span>
+                <div className="input-field">
+                  <input id="password" type="password" className="validate"/>
+                  <label htmlFor="password">Contraseña</label>
+                  <span className="helper-text" data-error="wrong" data-success="right"></span>
                 </div>
               </div>
               <div className="card-action">
-                <a class="waves-effect waves-light btn">Ingresar</a>
+                <a className="waves-effect waves-light btn">Ingresar</a>
               </div>
             </div>
           </div>

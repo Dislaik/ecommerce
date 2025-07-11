@@ -5,7 +5,6 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,12 +33,13 @@ public class Provider {
     UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
     return Jwts.builder()
-            .subject((userPrincipal.getUsername()))
-            .claim("username", userPrincipal.getUsername())
-            .issuedAt(new Date())
-            .expiration(new Date(System.currentTimeMillis() + EXPIRATION)) // 1 hora
-            .signWith(getSecretKey())
-            .compact();
+      .subject((userPrincipal.getUsername()))
+      .claim("username", userPrincipal.getUsername())
+      .claim("email", userPrincipal.getEmail())
+      .issuedAt(new Date())
+      .expiration(new Date(System.currentTimeMillis() + (24 * 60 * 60 * 1000))) // 1 Hora
+      .signWith(getSecretKey())
+      .compact();
   }
 
   public String getUserNameFromJwtToken(String token) {
@@ -53,7 +53,6 @@ public class Provider {
 
   public boolean validateJwtToken(String authToken) {
     try {
-      System.out.println(authToken);
       Jwts.parser().verifyWith(getSecretKey()).build().parse(authToken);
       return true;
     } catch (MalformedJwtException e) {

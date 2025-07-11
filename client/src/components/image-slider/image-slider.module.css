@@ -1,0 +1,55 @@
+.slider {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.sliderContent {
+  position: relative;
+}
+
+.sliderImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: white;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1;
+}
+
+.arrowLeft {
+  left: 10px;
+}
+
+.arrowRight {
+  right: 10px;
+}
+
+.dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  margin: 0 4px;
+  background-color: #bbb;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #717171;
+}

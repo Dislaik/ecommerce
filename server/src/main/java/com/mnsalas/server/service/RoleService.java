@@ -24,12 +24,12 @@ public class RoleService {
         return roleRepository.findById(id);
     }
 
-    public Optional<Role> getByRole(String role) {
-        return roleRepository.findByRole(role);
+    public Optional<Role> getByName(String role) {
+        return roleRepository.findByName(role);
     }
 
-    public Boolean existsByRole(String role) {
-        return roleRepository.existsByRole(role);
+    public Boolean existsByName(String role) {
+        return roleRepository.existsByName(role);
     }
 
     public Role save(Role role) {

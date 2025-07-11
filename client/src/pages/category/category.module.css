@@ -1,0 +1,14 @@
+.arrow {
+  font-size: 1.2rem;
+  color: #000;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+}
+
+.arrowLeft {
+  /* opcional: ícono o color específico */
+}
+
+.arrowRight {
+  /* opcional: ícono o color específico */
+}

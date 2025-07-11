@@ -20,8 +20,8 @@ public class EntryPoint implements AuthenticationEntryPoint {
   private final static Logger LOGGER = LoggerFactory.getLogger(EntryPoint.class);
 
   @Override
-  public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
-          throws IOException, ServletException {
+  public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+    
     LOGGER.error("Unauthorized error: {}", authException.getMessage());
 
     response.setContentType(MediaType.APPLICATION_JSON_VALUE);

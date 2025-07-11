@@ -1,15 +1,23 @@
 package com.mnsalas.server.dto;
 
+import com.mnsalas.server.entity.Role;
+
 import jakarta.validation.constraints.NotBlank;
 
 public class RegisterUser {
   @NotBlank
   private String email;
+
   @NotBlank
   private String password;
+
   @NotBlank
-  private String fullName;
-  private Integer role;
+  private String first_name;
+
+  @NotBlank
+  private String last_name;
+
+  private Role role;
 
   public String getEmail() {
     return email;
@@ -27,19 +35,27 @@ public class RegisterUser {
     this.password = password;
   }
 
-  public String getFullName() {
-    return fullName;
+  public String getFirstName() {
+    return first_name;
   }
 
-  public void setFullName(String fullName) {
-    this.fullName = fullName;
+  public void setFirstName(String first_name) {
+    this.first_name = first_name;
   }
 
-  public Integer getRole() {
+  public String getLastName() {
+    return last_name;
+  }
+
+  public void setLastName(String last_name) {
+    this.last_name = last_name;
+  }
+
+  public Role getRole() {
     return role;
   }
 
-  public void setRole(Integer role) {
+  public void setRole(Role role) {
     this.role = role;
   }
 }

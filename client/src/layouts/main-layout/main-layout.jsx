@@ -1,23 +1,23 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../../components/navbar/navbar';
 import Footer from '../../components/footer/footer';
-import './main-layout.css'; 
+import './main-layout.css';
 
 export default function MainLayout() {
   return (
     <>
       <header>
-        <Navbar title='Sample Store'/>
+        <Navbar title='Store'/>
       </header>
 
       <main>
-        <Outlet/>
+        <Outlet />
       </main>
 
       <footer>
-        <Footer/>
+        <Footer />
       </footer>
     </>
   );
-};
+}

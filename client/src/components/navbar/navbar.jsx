@@ -10,19 +10,22 @@ import './navbar.css';
 export default function Navbar({ title }) {
   const location = useLocation();
   const currentPath = location.pathname;
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
 
-  const toggleDropdown = () => {
-    setIsOpen(prev => !prev);
-  };
+  const [isUserOpen, setIsUserOpen] = useState(false);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+
+  const userDropdownRef = useRef(null);
+  const categoriesDropdownRef = useRef(null);
 
   const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsOpen(false);
+    if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
+      setIsUserOpen(false);
+    }
+    if (categoriesDropdownRef.current && !categoriesDropdownRef.current.contains(event.target)) {
+      setIsCategoriesOpen(false);
     }
   };
-  
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -41,42 +44,72 @@ export default function Navbar({ title }) {
           </div>
         </div>
       </div>
+
       <nav className='navbar'>
         <div className='container'>
           <div className='d-flex w-100'>
+
             <div className='navbar-logo'>
               <Link to="/">
                 <img src={logo} alt='Logo' draggable='false'/>
               </Link>
             </div>
+
             <div className='navbar-menu'>
               <Link to="/" className={`menu-item ${currentPath === '/' ? 'active' : ''}`}>Inicio</Link>
-              <Link to="/products" className={`menu-item ${currentPath === '/products' ? 'active' : ''}`}>Productos</Link>
+
+              <div
+                className={`menu-item dropdown ${isCategoriesOpen ? 'open' : ''}`}
+                ref={categoriesDropdownRef}
+                onMouseEnter={() => setIsCategoriesOpen(true)}
+                onMouseLeave={() => setIsCategoriesOpen(false)}
+              >
+                <div className={`dropdown-toggle ${currentPath.startsWith('/categories') ? 'active' : ''}`}>
+                  Categorias
+                </div>
+                {isCategoriesOpen && (
+                  <div className="pop-in dropdown-menu">
+                    <ul>
+                      <li><Link to="/categories/notebook" onClick={() => setIsCategoriesOpen(false)}>Notebooks</Link></li>
+                      <li><Link to="/categories/mouse" onClick={() => setIsCategoriesOpen(false)}>Mouses</Link></li>
+                      <li><Link to="/categories/keyboard" onClick={() => setIsCategoriesOpen(false)}>Teclados</Link></li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+
               <Link to="/about" className={`menu-item ${currentPath === '/about' ? 'active' : ''}`}>Sobre Nosotros</Link>
             </div>
+
             <div className='navbar-user'>
-              <div className="relative d-flex justify-content-center" ref={dropdownRef}>
-              <div className="user-profile-icon" onClick={toggleDropdown}>
-                <FontAwesomeIcon icon={faCircleUser} />
-              </div>
-                {isOpen && (
+              <div className="relative d-flex justify-content-center" ref={userDropdownRef}>
+                <div className="user-profile-icon" onClick={() => setIsUserOpen(prev => !prev)}>
+                  <FontAwesomeIcon icon={faCircleUser} />
+                </div>
+                {isUserOpen && (
                   <div className="pop-in dropdown-menu">
                     <ul>
                       <li>
-                        <Link to="/login" className="d-flex align-items-center gap-10" onClick={toggleDropdown}><FontAwesomeIcon icon={faArrowRightToBracket}/>Iniciar sesión</Link>
+                        <Link to="/login" onClick={() => setIsUserOpen(false)}>
+                          <FontAwesomeIcon icon={faArrowRightToBracket}/> Iniciar sesión
+                        </Link>
                       </li>
                       <li>
-                        <Link to="/register" className="d-flex align-items-center gap-10" onClick={toggleDropdown}><FontAwesomeIcon icon={faUser}/>Crear una cuenta</Link>
+                        <Link to="/register" onClick={() => setIsUserOpen(false)}>
+                          <FontAwesomeIcon icon={faUser}/> Crear una cuenta
+                        </Link>
                       </li>
                     </ul>
                   </div>
                 )}
               </div>
+
               <div className='shopping-cart-icon'>
                 <span className="notification">4</span>
                 <FontAwesomeIcon icon={faCartShopping} />
               </div>
             </div>
+
           </div>
         </div>
       </nav>

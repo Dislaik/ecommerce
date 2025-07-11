@@ -37,10 +37,10 @@ public class AuthController {
   @Autowired
   private Provider provider;
 
-  @PostMapping("/login")
+  @PostMapping("login")
   public ResponseEntity<?> login(@Valid @RequestBody LoginUser loginUser) {
     Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
+      new UsernamePasswordAuthenticationToken(loginUser.getEmail(), loginUser.getPassword()));
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String token = provider.generateToken(authentication);
@@ -48,17 +48,23 @@ public class AuthController {
     return new ResponseEntity<String>(token, HttpStatus.OK);
   }
 
-  @PostMapping("/register")
+  @PostMapping("register")
   public ResponseEntity<?> register(@Valid @RequestBody RegisterUser registerUser) {
     try {
-      Role userRole = roleService.getByRole("user").get();
-      User user = new User(registerUser.getEmail(), encoder.encode(registerUser.getPassword()), registerUser.getFullName(), userRole);
+      System.out.println(registerUser);
+      //Role userRole = roleService.getByName("user").get();
+      //User user = new User(registerUser.getEmail(), encoder.encode(registerUser.getPassword()), registerUser.getFullName(), userRole);
 
-      userService.save(user);
+      //userService.save(user);
 
       return new ResponseEntity<>("Usuario creado", HttpStatus.CREATED);
     } catch (Exception e) {
-      return new ResponseEntity<>("Nombre de usuario y/o contraseña no son correctas", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("Hubo un error inesperado", HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  // @PostMapping("register/google")
+  // public ResponseEntity<?> registerByGoogle(@Valid @RequestBody body) {
+
+  // }
 }

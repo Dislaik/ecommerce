@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class UserDetailsImpl implements UserDetails {
-  private static final Long serialVersionUID = 1L;
-
   private final Integer id;
 
   private final String email;
@@ -32,7 +30,7 @@ public class UserDetailsImpl implements UserDetails {
 
   public static UserDetailsImpl build(User user) {
     List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-    authorities.add(new SimpleGrantedAuthority(user.getRole().getRole()));
+    authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
 
     return new UserDetailsImpl(
             user.getId(),

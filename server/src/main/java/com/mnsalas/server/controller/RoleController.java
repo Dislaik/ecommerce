@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("role")
+@RequestMapping("/api/v1/role")
 @CrossOrigin(origins = "http://localhost:3000")
 public class RoleController {
 
@@ -29,7 +29,7 @@ public class RoleController {
   }
 
   @GetMapping("by-role/{role}")
-  public ResponseEntity<Optional<Role>> getByRole(@PathVariable String role) {
-    return new ResponseEntity<>(roleService.getByRole(role), HttpStatus.OK);
+  public ResponseEntity<Optional<Role>> getByName(@PathVariable String role) {
+    return new ResponseEntity<>(roleService.getByName(role), HttpStatus.OK);
   }
 }

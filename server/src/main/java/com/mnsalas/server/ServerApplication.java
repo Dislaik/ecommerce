@@ -2,14 +2,10 @@ package com.mnsalas.server;
 
 import com.mnsalas.server.entity.Role;
 import com.mnsalas.server.repository.RoleRepository;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.Base64;
 
 @SpringBootApplication
 public class ServerApplication implements CommandLineRunner {

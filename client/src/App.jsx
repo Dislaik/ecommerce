@@ -1,50 +1,70 @@
 import React, { useEffect, useState } from 'react';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion';
 import MainLayout from "./layouts/main-layout/main-layout";
 import Home from "./pages/home/home";
 import AboutUs from "./pages/about-us/about-us";
-import Products from './pages/products/products';
+import Category, { categoryLoader } from './pages/category/category';
 import Login from './pages/login/login';
 import Register from './pages/register/register';
+import Product, { productLoader } from './pages/product/product';
+import NotFound from './pages/not-found/not-found';
+import Categories from './pages/categories/categories';
 import "./App.css";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+      {
+        path: "categories",
+        element: <Categories />,
+      },
+      {
+        path: "categories/:category",
+        element: <Category />,
+        loader: categoryLoader,
+        errorElement: <NotFound/>
+      },
+      {
+        path: "categories/:category/:product",
+        element: <Product />,
+        loader: productLoader,
+        errorElement: <NotFound/>
+      },
+      {
+        path: "about",
+        element: <AboutUs />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
+  }
+]);
+
 const App = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    window.addEventListener('load', () => {
-      setLoading(false);
-    });
-
-    if (document.readyState === 'complete') {
-      setLoading(false);
-    }
-  }, []);
-
-  return (
-    <>
-      {loading && <LoadingBar/>}
-      <AnimatePresence mode="wait">
-        <Routes>
-          <Route path="/" element={<MainLayout/>}>
-            <Route path="" element={<Home/>}/>
-            <Route path="login" element={<Login/>}/>
-            <Route path="register" element={<Register/>}/>
-            <Route path="products" element={<Products/>}/>
-            <Route path="about" element={<AboutUs/>}/>
-          </Route>
-        </Routes>
-      </AnimatePresence>
-    </>
-  );
+  return <RouterProvider
+  router={router}
+  fallbackElement={<div>Cargando…</div>}
+/>;
 };
-
-const LoadingBar = () => (
-  <div className="progress">
-    <div className="indeterminate"></div>
-  </div>
-);
 
 
 
